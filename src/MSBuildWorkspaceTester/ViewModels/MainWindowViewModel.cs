@@ -10,6 +10,7 @@ namespace MSBuildWorkspaceTester.ViewModels
     internal class MainWindowViewModel : ViewModel<Window>
     {
         private readonly ILogger _logger;
+        private readonly OutputService _outputService;
 
         public ICommand OpenProjectCommand { get; }
 
@@ -18,7 +19,8 @@ namespace MSBuildWorkspaceTester.ViewModels
         {
             _logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<MainWindowViewModel>();
 
-            var msbuildRegistrationService = serviceProvider.GetRequiredService<MSBuildService>();
+            _outputService = serviceProvider.GetRequiredService<OutputService>();
+            _outputService.TextChanged += delegate { PropertyChanged("OutputText"); };
 
             OpenProjectCommand = RegisterCommand(
                 text: "Open Project",
@@ -33,5 +35,7 @@ namespace MSBuildWorkspaceTester.ViewModels
         {
             _logger.LogInformation("Open Project");
         }
+
+        public string OutputText => _outputService.GetText();
     }
 }

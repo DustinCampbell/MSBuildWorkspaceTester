@@ -36,12 +36,15 @@ namespace MSBuildWorkspaceTester.Services
             }
 
             _logger.LogInformation("The following MSBuild instances have benen discovered:");
+            _logger.LogInformation(string.Empty);
 
             for (int i = 0; i < instances.Length; i++)
             {
                 var instance = instances[i];
                 _logger.LogInformation($"    {i + 1}. {instance.Name} ({instance.Version})");
             }
+
+            _logger.LogInformation(string.Empty);
 
             return instances;
         }
@@ -50,7 +53,8 @@ namespace MSBuildWorkspaceTester.Services
         {
             MSBuildLocator.RegisterInstance(instance);
 
-            _logger.LogInformation("Registered first instance:");
+            _logger.LogInformation("Registered first MSBuild instance:");
+            _logger.LogInformation(string.Empty);
             _logger.LogInformation($"    Name: {instance.Name}");
             _logger.LogInformation($"    Version: {instance.Version}");
             _logger.LogInformation($"    VisualStudioRootPath: {instance.VisualStudioRootPath}");

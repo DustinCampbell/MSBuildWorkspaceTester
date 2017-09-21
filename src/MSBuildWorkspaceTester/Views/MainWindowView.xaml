@@ -3,7 +3,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:MSBuildWorkspaceTester.ViewModels"
         mc:Ignorable="d"
-        Title="MSBuildWorkspace Tester" Height="350" Width="525"
+        Title="MSBuildWorkspace Tester" Height="600" Width="800"
         vm:ViewModel.RegisterCommands="{Binding}">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,5 +18,12 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
+
+        <TextBox Grid.Row="1"
+                 FontFamily="Consolas"
+                 FontSize="14.0"
+                 Text="{Binding OutputText, Mode=OneWay}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </Grid>
 </Window>
