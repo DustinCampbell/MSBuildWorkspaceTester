@@ -38,6 +38,7 @@ namespace MSBuildWorkspaceTester
             serviceCollection.AddSingleton(loggerFactory);
             serviceCollection.AddSingleton(msbuildService);
             serviceCollection.AddSingleton(outputService);
+            serviceCollection.AddSingleton<WorkspaceService>();
         }
     }
 }

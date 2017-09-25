@@ -5,13 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace MSBuildWorkspaceTester.Services
 {
-    internal class MSBuildService
+    internal class MSBuildService : BaseService
     {
-        private readonly ILogger _logger;
-
         public MSBuildService(ILoggerFactory loggerFactory)
+            : base(loggerFactory)
         {
-            _logger = loggerFactory.CreateLogger<MSBuildService>();
         }
 
         public void Initialize()
@@ -31,20 +29,20 @@ namespace MSBuildWorkspaceTester.Services
             var instances = MSBuildLocator.QueryVisualStudioInstances().ToArray();
             if (instances.Length == 0)
             {
-                _logger.LogError("No MSBuild instances found.");
+                Logger.LogError("No MSBuild instances found.");
                 return Array.Empty<VisualStudioInstance>();
             }
 
-            _logger.LogInformation("The following MSBuild instances have benen discovered:");
-            _logger.LogInformation(string.Empty);
+            Logger.LogInformation("The following MSBuild instances have benen discovered:");
+            Logger.LogInformation(string.Empty);
 
             for (int i = 0; i < instances.Length; i++)
             {
                 var instance = instances[i];
-                _logger.LogInformation($"    {i + 1}. {instance.Name} ({instance.Version})");
+                Logger.LogInformation($"    {i + 1}. {instance.Name} ({instance.Version})");
             }
 
-            _logger.LogInformation(string.Empty);
+            Logger.LogInformation(string.Empty);
 
             return instances;
         }
@@ -53,12 +51,13 @@ namespace MSBuildWorkspaceTester.Services
         {
             MSBuildLocator.RegisterInstance(instance);
 
-            _logger.LogInformation("Registered first MSBuild instance:");
-            _logger.LogInformation(string.Empty);
-            _logger.LogInformation($"    Name: {instance.Name}");
-            _logger.LogInformation($"    Version: {instance.Version}");
-            _logger.LogInformation($"    VisualStudioRootPath: {instance.VisualStudioRootPath}");
-            _logger.LogInformation($"    MSBuildPath: {instance.MSBuildPath}");
+            Logger.LogInformation("Registered first MSBuild instance:");
+            Logger.LogInformation(string.Empty);
+            Logger.LogInformation($"    Name: {instance.Name}");
+            Logger.LogInformation($"    Version: {instance.Version}");
+            Logger.LogInformation($"    VisualStudioRootPath: {instance.VisualStudioRootPath}");
+            Logger.LogInformation($"    MSBuildPath: {instance.MSBuildPath}");
+            Logger.LogInformation(string.Empty);
         }
     }
 }

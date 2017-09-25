@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
 using MSBuildWorkspaceTester.Services;
 
 namespace MSBuildWorkspaceTester.ViewModels
@@ -11,6 +12,7 @@ namespace MSBuildWorkspaceTester.ViewModels
     {
         private readonly ILogger _logger;
         private readonly OutputService _outputService;
+        private readonly WorkspaceService _workspaceService;
 
         public ICommand OpenProjectCommand { get; }
 
@@ -22,9 +24,11 @@ namespace MSBuildWorkspaceTester.ViewModels
             _outputService = serviceProvider.GetRequiredService<OutputService>();
             _outputService.TextChanged += delegate { PropertyChanged("OutputText"); };
 
+            _workspaceService = serviceProvider.GetRequiredService<WorkspaceService>();
+
             OpenProjectCommand = RegisterCommand(
-                text: "Open Project",
-                name: "Open Project",
+                text: "Open Project/Solution",
+                name: "Open Project/Solution",
                 executed: OpenProjectExecuted,
                 canExecute: CanOpenProjectExecute);
         }
@@ -33,7 +37,19 @@ namespace MSBuildWorkspaceTester.ViewModels
 
         private void OpenProjectExecuted()
         {
-            _logger.LogInformation("Open Project");
+            var dialog = new OpenFileDialog
+            {
+                Title = "Open Project or Solution",
+                Filter = "Supported Files (*.sln,*.csproj,*.vbproj)|*.sln;*.csproj;*.vbproj|" +
+                         "Solution Files (*.sln)||*.sln|" +
+                         "Project Files (*.csproj,*.vbproj)|*.csproj|*.vbproj|" +
+                         "All Files (*.*)|*.*"
+            };
+
+            if (dialog.ShowDialog(this.View) == true)
+            {
+                _workspaceService.OpenSolutionAsync(dialog.FileName).ConfigureAwait(continueOnCapturedContext: true);
+            }
         }
 
         public string OutputText => _outputService.GetText();

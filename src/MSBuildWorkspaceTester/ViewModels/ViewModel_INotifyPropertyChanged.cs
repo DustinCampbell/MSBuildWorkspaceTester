@@ -26,7 +26,8 @@ namespace MSBuildWorkspaceTester.ViewModels
 
         protected void PropertyChanged(string propertyName)
         {
-            _propertyChangedHandler?.Invoke(this, GetEventArgs(propertyName));
+            var eventArgs = GetEventArgs(propertyName);
+            _propertyChangedHandler?.Invoke(this, eventArgs);
         }
 
         protected void AllPropertiesChanged()
@@ -36,8 +37,8 @@ namespace MSBuildWorkspaceTester.ViewModels
 
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {
-            add { _propertyChangedHandler += _propertyChangedHandler; }
-            remove { _propertyChangedHandler += _propertyChangedHandler; }
+            add { _propertyChangedHandler += value; }
+            remove { _propertyChangedHandler -= value; }
         }
     }
 }

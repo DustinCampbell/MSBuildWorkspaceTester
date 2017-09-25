@@ -13,7 +13,7 @@
 
         <ToolBarTray Grid.Row="0" ToolBarTray.IsLocked="True">
             <ToolBar>
-                <Button Command="{Binding OpenProjectCommand}" ToolTip="Open Project">
+                <Button Command="{Binding OpenProjectCommand}" ToolTip="Open project or solution">
                     <Image Source="{StaticResource OpenFolderIcon}" />
                 </Button>
             </ToolBar>
