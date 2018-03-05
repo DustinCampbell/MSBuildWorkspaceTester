@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Build.MSBuildLocator;
+using Microsoft.Build.Locator;
 using Microsoft.Extensions.Logging;
 
 namespace MSBuildWorkspaceTester.Services
