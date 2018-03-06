@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +36,7 @@ namespace MSBuildWorkspaceTester.ViewModels
 
         private bool CanOpenProjectExecute() => true;
 
-        private void OpenProjectExecuted()
+        private async void OpenProjectExecuted()
         {
             var dialog = new OpenFileDialog
             {
@@ -48,7 +49,19 @@ namespace MSBuildWorkspaceTester.ViewModels
 
             if (dialog.ShowDialog(this.View) == true)
             {
-                _workspaceService.OpenSolutionAsync(dialog.FileName).ConfigureAwait(continueOnCapturedContext: true);
+                var fileName = dialog.FileName;
+                var extension = Path.GetExtension(fileName);
+
+                switch (extension)
+                {
+                    case ".sln":
+                        await _workspaceService.OpenSolutionAsync(fileName);
+                        break;
+
+                    default:
+                        await _workspaceService.OpenProjectAsync(fileName);
+                        break;
+                }
             }
         }
 

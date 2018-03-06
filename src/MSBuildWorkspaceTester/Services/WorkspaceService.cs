@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.Extensions.Logging;
 
@@ -13,6 +15,19 @@ namespace MSBuildWorkspaceTester.Services
             : base(loggerFactory)
         {
             _workspace = MSBuildWorkspace.Create();
+            _workspace.WorkspaceFailed += WorkspaceFailed;
+        }
+
+        private void WorkspaceFailed(object sender, WorkspaceDiagnosticEventArgs e)
+        {
+            if (e.Diagnostic.Kind == WorkspaceDiagnosticKind.Failure)
+            {
+                Logger.LogError(e.Diagnostic.Message);
+            }
+            else
+            {
+                Logger.LogWarning(e.Diagnostic.Message);
+            }
         }
 
         public async Task OpenSolutionAsync(string solutionFilePath)
@@ -22,6 +37,15 @@ namespace MSBuildWorkspaceTester.Services
 
             watch.Stop();
             Logger.LogInformation($"Solution opened: {watch.Elapsed}");
+        }
+
+        public async Task OpenProjectAsync(string projectFilePath)
+        {
+            var watch = Stopwatch.StartNew();
+            var project = await _workspace.OpenProjectAsync(projectFilePath);
+
+            watch.Stop();
+            Logger.LogInformation($"Project opened: {watch.Elapsed}");
         }
     }
 }
