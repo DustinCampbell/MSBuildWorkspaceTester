@@ -59,7 +59,14 @@
     <Compile Include="Services\OutputService.cs" />
     <Compile Include="Services\MSBuildService.cs" />
     <Compile Include="Services\WorkspaceService.cs" />
+    <Compile Include="ViewModels\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\FolderViewModel.cs" />
+    <Compile Include="ViewModels\HierarchyItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MetadataReferenceViewModel.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\ReferencesFolderViewModel.cs" />
+    <Compile Include="ViewModels\SolutionViewModel.cs" />
     <Compile Include="ViewModels\ViewModel_CommandBindings.cs" />
     <Compile Include="ViewModels\ViewModel_INotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\ViewModel`1.cs" />

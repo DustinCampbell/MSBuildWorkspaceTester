@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -9,13 +8,13 @@ namespace MSBuildWorkspaceTester.Services
 {
     internal class WorkspaceService : BaseService
     {
-        private readonly MSBuildWorkspace _workspace;
+        public MSBuildWorkspace Workspace { get; }
 
         public WorkspaceService(ILoggerFactory loggerFactory)
             : base(loggerFactory)
         {
-            _workspace = MSBuildWorkspace.Create();
-            _workspace.WorkspaceFailed += WorkspaceFailed;
+            Workspace = MSBuildWorkspace.Create();
+            Workspace.WorkspaceFailed += WorkspaceFailed;
         }
 
         private void WorkspaceFailed(object sender, WorkspaceDiagnosticEventArgs e)
@@ -33,7 +32,7 @@ namespace MSBuildWorkspaceTester.Services
         public async Task OpenSolutionAsync(string solutionFilePath)
         {
             var watch = Stopwatch.StartNew();
-            var solution = await _workspace.OpenSolutionAsync(solutionFilePath);
+            var solution = await Workspace.OpenSolutionAsync(solutionFilePath);
 
             watch.Stop();
             Logger.LogInformation($"Solution opened: {watch.Elapsed}");
@@ -42,7 +41,7 @@ namespace MSBuildWorkspaceTester.Services
         public async Task OpenProjectAsync(string projectFilePath)
         {
             var watch = Stopwatch.StartNew();
-            var project = await _workspace.OpenProjectAsync(projectFilePath);
+            var project = await Workspace.OpenProjectAsync(projectFilePath);
 
             watch.Stop();
             Logger.LogInformation($"Project opened: {watch.Elapsed}");

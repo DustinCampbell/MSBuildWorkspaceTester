@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MSBuildWorkspaceTester.ViewModels
 {
@@ -39,6 +40,15 @@ namespace MSBuildWorkspaceTester.ViewModels
         {
             add { _propertyChangedHandler += value; }
             remove { _propertyChangedHandler -= value; }
+        }
+
+        protected void SetValue<T>(ref T value, T newValue, [CallerMemberName] string propertyName = null)
+        {
+            if (!EqualityComparer<T>.Default.Equals(value, newValue))
+            {
+                value = newValue;
+                PropertyChanged(propertyName);
+            }
         }
     }
 }

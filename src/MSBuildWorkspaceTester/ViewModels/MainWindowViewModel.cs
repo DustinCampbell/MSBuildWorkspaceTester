@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -15,6 +16,8 @@ namespace MSBuildWorkspaceTester.ViewModels
         private readonly OutputService _outputService;
         private readonly WorkspaceService _workspaceService;
 
+        private ObservableCollection<SolutionViewModel> _solution;
+
         public ICommand OpenProjectCommand { get; }
 
         public MainWindowViewModel(IServiceProvider serviceProvider)
@@ -26,6 +29,8 @@ namespace MSBuildWorkspaceTester.ViewModels
             _outputService.TextChanged += delegate { PropertyChanged("OutputText"); };
 
             _workspaceService = serviceProvider.GetRequiredService<WorkspaceService>();
+
+            _solution = new ObservableCollection<SolutionViewModel>();
 
             OpenProjectCommand = RegisterCommand(
                 text: "Open Project/Solution",
@@ -56,6 +61,10 @@ namespace MSBuildWorkspaceTester.ViewModels
                 {
                     case ".sln":
                         await _workspaceService.OpenSolutionAsync(fileName);
+                        _solution.Clear();
+
+                        var viewModel = new SolutionViewModel(_workspaceService.Workspace);
+                        _solution.Add(viewModel);
                         break;
 
                     default:
@@ -66,5 +75,6 @@ namespace MSBuildWorkspaceTester.ViewModels
         }
 
         public string OutputText => _outputService.GetText();
+        public ObservableCollection<SolutionViewModel> Solution => _solution;
     }
 }
