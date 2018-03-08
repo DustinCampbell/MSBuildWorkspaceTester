@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -32,7 +34,7 @@ namespace MSBuildWorkspaceTester.Services
         public async Task OpenSolutionAsync(string solutionFilePath)
         {
             var watch = Stopwatch.StartNew();
-            var solution = await Workspace.OpenSolutionAsync(solutionFilePath);
+            var solution = await Workspace.OpenSolutionAsync(solutionFilePath, new LoaderProgress(Logger));
 
             watch.Stop();
             Logger.LogInformation($"Solution opened: {watch.Elapsed}");
@@ -41,10 +43,25 @@ namespace MSBuildWorkspaceTester.Services
         public async Task OpenProjectAsync(string projectFilePath)
         {
             var watch = Stopwatch.StartNew();
-            var project = await Workspace.OpenProjectAsync(projectFilePath);
+            var project = await Workspace.OpenProjectAsync(projectFilePath, new LoaderProgress(Logger));
 
             watch.Stop();
             Logger.LogInformation($"Project opened: {watch.Elapsed}");
+        }
+
+        private class LoaderProgress : IProgress<ProjectLoadProgress>
+        {
+            private readonly ILogger _logger;
+
+            public LoaderProgress(ILogger logger)
+            {
+                _logger = logger;
+            }
+
+            public void Report(ProjectLoadProgress loadProgress)
+            {
+                _logger.LogInformation($"{loadProgress.LoadStatus}: {Path.GetFileName(loadProgress.FilePath)}");
+            }
         }
     }
 }
