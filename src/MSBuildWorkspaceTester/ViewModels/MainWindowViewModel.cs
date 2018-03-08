@@ -57,20 +57,21 @@ namespace MSBuildWorkspaceTester.ViewModels
                 var fileName = dialog.FileName;
                 var extension = Path.GetExtension(fileName);
 
+                _logger.LogInformation($"\r\nLoading {fileName}...\r\n");
+
                 switch (extension)
                 {
                     case ".sln":
                         await _workspaceService.OpenSolutionAsync(fileName);
-                        _solution.Clear();
-                        _solution.Add(new SolutionViewModel(_workspaceService.Workspace));
                         break;
 
                     default:
                         await _workspaceService.OpenProjectAsync(fileName);
-                        _solution.Clear();
-                        _solution.Add(new SolutionViewModel(_workspaceService.Workspace));
                         break;
                 }
+
+                _solution.Clear();
+                _solution.Add(new SolutionViewModel(_workspaceService.Workspace));
             }
         }
 

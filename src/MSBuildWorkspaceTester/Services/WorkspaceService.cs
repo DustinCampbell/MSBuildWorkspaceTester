@@ -33,20 +33,29 @@ namespace MSBuildWorkspaceTester.Services
 
         public async Task OpenSolutionAsync(string solutionFilePath)
         {
+            LogHeader();
+
             var watch = Stopwatch.StartNew();
             var solution = await Workspace.OpenSolutionAsync(solutionFilePath, new LoaderProgress(Logger));
 
             watch.Stop();
-            Logger.LogInformation($"Solution opened: {watch.Elapsed}");
+            Logger.LogInformation($"\r\nSolution opened: {watch.Elapsed}");
         }
 
         public async Task OpenProjectAsync(string projectFilePath)
         {
+            LogHeader();
+
             var watch = Stopwatch.StartNew();
             var project = await Workspace.OpenProjectAsync(projectFilePath, new LoaderProgress(Logger));
 
             watch.Stop();
-            Logger.LogInformation($"Project opened: {watch.Elapsed}");
+            Logger.LogInformation($"\r\nProject opened: {watch.Elapsed}:s\\.fffffff");
+        }
+
+        private void LogHeader()
+        {
+            Logger.LogInformation("Operation       Elapsed Time    Project");
         }
 
         private class LoaderProgress : IProgress<ProjectLoadProgress>
@@ -60,7 +69,7 @@ namespace MSBuildWorkspaceTester.Services
 
             public void Report(ProjectLoadProgress loadProgress)
             {
-                _logger.LogInformation($"{loadProgress.LoadStatus}: {Path.GetFileName(loadProgress.FilePath)}");
+                _logger.LogInformation($"{loadProgress.LoadStatus,-15} {loadProgress.ElapsedTime,-15:s\\.fffffff} {Path.GetFileName(loadProgress.FilePath)}");
             }
         }
     }
