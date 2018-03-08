@@ -62,13 +62,13 @@ namespace MSBuildWorkspaceTester.ViewModels
                     case ".sln":
                         await _workspaceService.OpenSolutionAsync(fileName);
                         _solution.Clear();
-
-                        var viewModel = new SolutionViewModel(_workspaceService.Workspace);
-                        _solution.Add(viewModel);
+                        _solution.Add(new SolutionViewModel(_workspaceService.Workspace));
                         break;
 
                     default:
                         await _workspaceService.OpenProjectAsync(fileName);
+                        _solution.Clear();
+                        _solution.Add(new SolutionViewModel(_workspaceService.Workspace));
                         break;
                 }
             }
