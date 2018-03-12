@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild, Version=42.42.42.42, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\roslyn\Binaries\Debug\Dlls\Workspaces.MSBuild\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -116,7 +120,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces">
       <Version>2.9.0-dev-65535-01</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild">
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces">
       <Version>2.9.0-dev-65535-01</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection">

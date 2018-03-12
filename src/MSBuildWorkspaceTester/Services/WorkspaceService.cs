@@ -39,7 +39,7 @@ namespace MSBuildWorkspaceTester.Services
             var solution = await Workspace.OpenSolutionAsync(solutionFilePath, new LoaderProgress(Logger));
 
             watch.Stop();
-            Logger.LogInformation($"\r\nSolution opened: {watch.Elapsed}");
+            Logger.LogInformation($"\r\nSolution opened: {watch.Elapsed:m\\:ss\\.fffffff}");
         }
 
         public async Task OpenProjectAsync(string projectFilePath)
@@ -50,7 +50,7 @@ namespace MSBuildWorkspaceTester.Services
             var project = await Workspace.OpenProjectAsync(projectFilePath, new LoaderProgress(Logger));
 
             watch.Stop();
-            Logger.LogInformation($"\r\nProject opened: {watch.Elapsed}:s\\.fffffff");
+            Logger.LogInformation($"\r\nProject opened: {watch.Elapsed:m\\:ss\\.fffffff}");
         }
 
         private void LogHeader()
@@ -69,7 +69,14 @@ namespace MSBuildWorkspaceTester.Services
 
             public void Report(ProjectLoadProgress loadProgress)
             {
-                _logger.LogInformation($"{loadProgress.LoadStatus,-15} {loadProgress.ElapsedTime,-15:s\\.fffffff} {Path.GetFileName(loadProgress.FilePath)}");
+                var projectDisplay = Path.GetFileName(loadProgress.FilePath);
+
+                if (loadProgress.TargetFramework != null)
+                {
+                    projectDisplay += $" ({loadProgress.TargetFramework})";
+                }
+
+                _logger.LogInformation($"{loadProgress.Operation,-15} {loadProgress.ElapsedTime,-15:m\\:ss\\.fffffff} {projectDisplay}");
             }
         }
     }
