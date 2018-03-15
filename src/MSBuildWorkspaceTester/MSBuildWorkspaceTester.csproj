@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\TextBoxBehaviors.cs" />
     <Compile Include="Logging\Extensions.cs" />
     <Compile Include="Logging\OutputLogger.cs" />
     <Compile Include="Logging\OutputLoggerProvider.cs" />
