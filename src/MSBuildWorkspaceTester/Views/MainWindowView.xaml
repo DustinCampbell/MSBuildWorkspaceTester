@@ -6,6 +6,7 @@
         xmlns:vm="clr-namespace:MSBuildWorkspaceTester.ViewModels"
         mc:Ignorable="d"
         Title="MSBuildWorkspace Tester" Height="768" Width="1024"
+        FontSize="15"
         vm:ViewModel.RegisterCommands="{Binding}">
     <Grid>
         <Grid.RowDefinitions>
@@ -45,8 +46,18 @@
                                               ItemsSource="{Binding Children}">
                         <StackPanel Orientation="Horizontal"
                                     Margin="0,2">
-                            <Image Source="{StaticResource CSharpProjectIcon}"
-                                   Margin="0,0,4,0" />
+                            <Image Margin="0,0,4,0">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="{StaticResource CSharpProjectIcon}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Language}" Value="Visual Basic">
+                                                <Setter Property="Source" Value="{StaticResource VisualBasicProjectIcon}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
                             <TextBlock Text="{Binding DisplayName}"/>
                         </StackPanel>
                     </HierarchicalDataTemplate>
@@ -80,11 +91,40 @@
                         </StackPanel>
                     </HierarchicalDataTemplate>
 
+                    <HierarchicalDataTemplate DataType="{x:Type vm:ProjectReferenceViewModel}">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,2">
+                            <Image Margin="0,0,4,0">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="{StaticResource CSharpProjectIcon}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Language}" Value="Visual Basic">
+                                                <Setter Property="Source" Value="{StaticResource VisualBasicProjectIcon}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock Text="{Binding DisplayName}"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+
                     <HierarchicalDataTemplate DataType="{x:Type vm:DocumentViewModel}">
                         <StackPanel Orientation="Horizontal"
                                     Margin="0,2">
-                            <Image Source="{StaticResource CSharpFileIcon}"
-                                   Margin="0,0,4,0" />
+                            <Image Margin="0,0,4,0">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="{StaticResource CSharpFileIcon}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Language}" Value="Visual Basic">
+                                                <Setter Property="Source" Value="{StaticResource VisualBasicFileIcon}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
                             <TextBlock Text="{Binding DisplayName}"/>
                         </StackPanel>
                     </HierarchicalDataTemplate>

@@ -69,6 +69,7 @@
     <Compile Include="ViewModels\HierarchyItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MetadataReferenceViewModel.cs" />
+    <Compile Include="ViewModels\ProjectReferenceViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\ReferencesFolderViewModel.cs" />
     <Compile Include="ViewModels\SolutionViewModel.cs" />
@@ -122,6 +123,9 @@
       <Version>2.9.0-dev-65535-01</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces">
+      <Version>2.9.0-dev-65535-01</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild">
       <Version>2.9.0-dev-65535-01</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection">

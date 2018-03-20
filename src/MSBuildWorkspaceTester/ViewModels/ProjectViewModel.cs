@@ -44,17 +44,36 @@ namespace MSBuildWorkspaceTester.ViewModels
                 }
             }
 
+            ReferencesFolderViewModel referencesFolderViewModel = null;
+
             // Add references
             if (project.MetadataReferences.Count > 0)
             {
-                var referencesFolderViewModel = new ReferencesFolderViewModel(workspace);
+                referencesFolderViewModel = new ReferencesFolderViewModel(workspace);
 
                 foreach (var metadataReference in project.MetadataReferences)
                 {
                     var metadataReferenceViewModel = new MetadataReferenceViewModel(workspace, metadataReference);
                     referencesFolderViewModel.AddChild(metadataReferenceViewModel);
                 }
+            }
 
+            if (project.ProjectReferences.Any())
+            {
+                if (referencesFolderViewModel == null)
+                {
+                    referencesFolderViewModel = new ReferencesFolderViewModel(workspace);
+                }
+
+                foreach (var projectReference in project.ProjectReferences)
+                {
+                    var projectReferenceViewModel = new ProjectReferenceViewModel(workspace, projectReference);
+                    referencesFolderViewModel.AddChild(projectReferenceViewModel);
+                }
+            }
+
+            if (referencesFolderViewModel != null)
+            {
                 AddChild(referencesFolderViewModel);
             }
         }
@@ -104,5 +123,8 @@ namespace MSBuildWorkspaceTester.ViewModels
 
         protected override string GetDisplayName()
             => Workspace.CurrentSolution.GetProject(_projectId).Name;
+
+        public string Language
+            => Workspace.CurrentSolution.GetProject(_projectId).Language;
     }
 }
