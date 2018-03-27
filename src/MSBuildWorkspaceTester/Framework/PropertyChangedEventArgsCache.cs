@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace MSBuildWorkspaceTester.ViewModels
+namespace MSBuildWorkspaceTester.Framework
 {
     internal static class PropertyChangedEventArgsCache
     {

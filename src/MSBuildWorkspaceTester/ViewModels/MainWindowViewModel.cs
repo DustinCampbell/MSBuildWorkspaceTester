@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
+using MSBuildWorkspaceTester.Framework;
 using MSBuildWorkspaceTester.Services;
 
 namespace MSBuildWorkspaceTester.ViewModels

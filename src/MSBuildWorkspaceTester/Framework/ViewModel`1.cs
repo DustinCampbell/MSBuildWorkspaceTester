@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MSBuildWorkspaceTester.ViewModels
+namespace MSBuildWorkspaceTester.Framework
 {
     internal abstract class ViewModel<TView> : ViewModel
         where TView : ContentControl

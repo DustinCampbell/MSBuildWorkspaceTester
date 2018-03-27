@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace MSBuildWorkspaceTester.ViewModels
+namespace MSBuildWorkspaceTester.Framework
 {
     internal partial class ViewModel
     {

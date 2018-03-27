@@ -4,11 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="clr-namespace:MSBuildWorkspaceTester.Behaviors"
         xmlns:vm="clr-namespace:MSBuildWorkspaceTester.ViewModels"
+        xmlns:f="clr-namespace:MSBuildWorkspaceTester.Framework"
         mc:Ignorable="d"
         Name="MainWindow"
         Title="MSBuildWorkspace Tester" Height="768" Width="1024"
         FontSize="15"
-        vm:ViewModel.RegisterCommands="{Binding}">
+        f:ViewModel.RegisterCommands="{Binding}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

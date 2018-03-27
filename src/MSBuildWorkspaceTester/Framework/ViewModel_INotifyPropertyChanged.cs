@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MSBuildWorkspaceTester.ViewModels
+namespace MSBuildWorkspaceTester.Framework
 {
     internal abstract partial class ViewModel : INotifyPropertyChanged
     {

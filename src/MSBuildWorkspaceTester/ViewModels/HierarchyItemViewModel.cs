@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Microsoft.CodeAnalysis;
+using MSBuildWorkspaceTester.Framework;
 
 namespace MSBuildWorkspaceTester.ViewModels
 {

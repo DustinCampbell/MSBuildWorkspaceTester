@@ -74,16 +74,16 @@
     <Compile Include="ViewModels\LogViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MetadataReferenceViewModel.cs" />
-    <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
+    <Compile Include="Framework\NotifyTaskCompletion.cs" />
     <Compile Include="ViewModels\PageViewModel.cs" />
     <Compile Include="ViewModels\ProjectReferenceViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="ViewModels\PropertyChangedEventArgsCache.cs" />
+    <Compile Include="Framework\PropertyChangedEventArgsCache.cs" />
     <Compile Include="ViewModels\ReferencesFolderViewModel.cs" />
     <Compile Include="ViewModels\SolutionViewModel.cs" />
-    <Compile Include="ViewModels\ViewModel_CommandBindings.cs" />
-    <Compile Include="ViewModels\ViewModel_INotifyPropertyChanged.cs" />
-    <Compile Include="ViewModels\ViewModel`1.cs" />
+    <Compile Include="Framework\ViewModel_CommandBindings.cs" />
+    <Compile Include="Framework\ViewModel_INotifyPropertyChanged.cs" />
+    <Compile Include="Framework\ViewModel`1.cs" />
     <Page Include="Resources\Images.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

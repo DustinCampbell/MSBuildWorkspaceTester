@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using MSBuildWorkspaceTester.Framework;
 
 namespace MSBuildWorkspaceTester.ViewModels
 {

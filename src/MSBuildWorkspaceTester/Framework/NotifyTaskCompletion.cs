@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace MSBuildWorkspaceTester.ViewModels
+namespace MSBuildWorkspaceTester.Framework
 {
     public class NotifyTaskCompletion<TResult> : INotifyPropertyChanged
     {
