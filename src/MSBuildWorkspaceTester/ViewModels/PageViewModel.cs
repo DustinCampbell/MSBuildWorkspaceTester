@@ -7,14 +7,18 @@ namespace MSBuildWorkspaceTester.ViewModels
     internal abstract class PageViewModel : ViewModel
     {
         private string _caption;
+        private FrameworkElement _content;
 
         public string Caption
         {
             get => _caption;
-            protected set
-            {
-                SetValue(ref _caption, value);
-            }
+            protected set => SetValue(ref _caption, value);
+        }
+
+        public FrameworkElement Content
+        {
+            get => _content;
+            protected set => SetValue(ref _content, value);
         }
     }
 
@@ -24,7 +28,6 @@ namespace MSBuildWorkspaceTester.ViewModels
         private readonly string _contentName;
 
         protected IServiceProvider ServiceProvider { get; }
-        public TContent Content { get; private set; }
 
         protected PageViewModel(string contentName, IServiceProvider serviceProvider)
         {
@@ -45,12 +48,13 @@ namespace MSBuildWorkspaceTester.ViewModels
         public TContent CreateContent()
         {
             var uri = new Uri(GetViewUriString(), UriKind.Relative);
-            Content = (TContent)Application.LoadComponent(uri);
-            Content.DataContext = this;
+            var content = (TContent)Application.LoadComponent(uri);
+            content.DataContext = this;
+            Content = content;
 
-            OnContentCreated(Content);
+            OnContentCreated(content);
 
-            return Content;
+            return content;
         }
     }
 }

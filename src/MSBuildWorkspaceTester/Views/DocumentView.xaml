@@ -10,6 +10,8 @@
         <TextBox FontFamily="Consolas"
                  FontSize="14.0"
                  Text="{Binding SourceText.Result, Mode=OneWay}"
+                 IsReadOnly="True"
+                 IsReadOnlyCaretVisible="False"
                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
                  ScrollViewer.VerticalScrollBarVisibility="Auto" />
     </Grid>
