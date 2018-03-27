@@ -12,8 +12,8 @@ namespace MSBuildWorkspaceTester.Services
     {
         public MSBuildWorkspace Workspace { get; }
 
-        public WorkspaceService(ILoggerFactory loggerFactory)
-            : base(loggerFactory)
+        public WorkspaceService(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             Workspace = MSBuildWorkspace.Create();
             Workspace.WorkspaceFailed += WorkspaceFailed;

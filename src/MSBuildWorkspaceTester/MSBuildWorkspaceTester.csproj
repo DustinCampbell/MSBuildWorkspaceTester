@@ -56,27 +56,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\MouseDoubleClickBehaviors.cs" />
     <Compile Include="Behaviors\TextBoxBehaviors.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Logging\Extensions.cs" />
     <Compile Include="Logging\OutputLogger.cs" />
     <Compile Include="Logging\OutputLoggerProvider.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\OpenDocumentService.cs" />
     <Compile Include="Services\OutputService.cs" />
     <Compile Include="Services\MSBuildService.cs" />
     <Compile Include="Services\WorkspaceService.cs" />
+    <Compile Include="ViewModels\DocumentPageViewModel.cs" />
     <Compile Include="ViewModels\DocumentViewModel.cs" />
     <Compile Include="ViewModels\FolderViewModel.cs" />
     <Compile Include="ViewModels\HierarchyItemViewModel.cs" />
+    <Compile Include="ViewModels\LogViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MetadataReferenceViewModel.cs" />
+    <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
+    <Compile Include="ViewModels\PageViewModel.cs" />
     <Compile Include="ViewModels\ProjectReferenceViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\PropertyChangedEventArgsCache.cs" />
     <Compile Include="ViewModels\ReferencesFolderViewModel.cs" />
     <Compile Include="ViewModels\SolutionViewModel.cs" />
     <Compile Include="ViewModels\ViewModel_CommandBindings.cs" />
     <Compile Include="ViewModels\ViewModel_INotifyPropertyChanged.cs" />
     <Compile Include="ViewModels\ViewModel`1.cs" />
     <Page Include="Resources\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocumentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

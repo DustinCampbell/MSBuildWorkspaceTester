@@ -20,6 +20,9 @@ namespace MSBuildWorkspaceTester
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
+            var msbuildService = serviceProvider.GetRequiredService<MSBuildService>();
+            msbuildService.Initialize();
+
             var mainWindowViewModel = new MainWindowViewModel(serviceProvider);
 
             this.MainWindow = mainWindowViewModel.CreateView();
@@ -32,13 +35,11 @@ namespace MSBuildWorkspaceTester
             var loggerFactory = new LoggerFactory()
                 .AddOutput(outputService);
 
-            var msbuildService = new MSBuildService(loggerFactory);
-            msbuildService.Initialize();
-
             serviceCollection.AddSingleton(loggerFactory);
-            serviceCollection.AddSingleton(msbuildService);
             serviceCollection.AddSingleton(outputService);
+            serviceCollection.AddSingleton<MSBuildService>();
             serviceCollection.AddSingleton<WorkspaceService>();
+            serviceCollection.AddSingleton<OpenDocumentService>();
         }
     }
 }

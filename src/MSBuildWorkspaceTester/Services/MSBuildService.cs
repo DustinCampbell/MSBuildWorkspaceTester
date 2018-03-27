@@ -7,8 +7,8 @@ namespace MSBuildWorkspaceTester.Services
 {
     internal class MSBuildService : BaseService
     {
-        public MSBuildService(ILoggerFactory loggerFactory)
-            : base(loggerFactory)
+        public MSBuildService(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 

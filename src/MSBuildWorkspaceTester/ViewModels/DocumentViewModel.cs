@@ -1,22 +1,32 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 
 namespace MSBuildWorkspaceTester.ViewModels
 {
     internal class DocumentViewModel : HierarchyItemViewModel
     {
-        private readonly DocumentId _documentId;
+        public DocumentId DocumentId { get; }
 
         public DocumentViewModel(Workspace workspace, DocumentId documentId)
             : base(workspace, isExpanded: false)
         {
-            _documentId = documentId;
+            DocumentId = documentId;
         }
 
+        private Document GetDocument()
+            => Workspace.CurrentSolution.GetDocument(DocumentId);
+
         protected override string GetDisplayName()
-            => Workspace.CurrentSolution.GetDocument(_documentId).Name;
+            => GetDocument().Name;
 
         public string Language
-            => Workspace.CurrentSolution.GetDocument(_documentId).Project.Language;
+            => GetDocument().Project.Language;
+
+        public async Task<string> GetSourceTextAsync()
+        {
+            var text = await GetDocument().GetTextAsync();
+            return text.ToString();
+        }
 
         public override int CompareTo(HierarchyItemViewModel other)
         {

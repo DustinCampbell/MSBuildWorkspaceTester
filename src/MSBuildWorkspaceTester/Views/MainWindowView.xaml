@@ -5,6 +5,7 @@
         xmlns:b="clr-namespace:MSBuildWorkspaceTester.Behaviors"
         xmlns:vm="clr-namespace:MSBuildWorkspaceTester.ViewModels"
         mc:Ignorable="d"
+        Name="MainWindow"
         Title="MSBuildWorkspace Tester" Height="768" Width="1024"
         FontSize="15"
         vm:ViewModel.RegisterCommands="{Binding}">
@@ -133,19 +134,22 @@
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="TreeViewItem">
                         <Setter Property="IsExpanded" Value="{Binding IsExpanded}" />
+                        <Setter Property="b:MouseDoubleClickBehaviors.Command" Value="{Binding DataContext.OpenFileCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                        <Setter Property="b:MouseDoubleClickBehaviors.CommandParameter" Value="{Binding}" />
                     </Style>
                 </TreeView.ItemContainerStyle>
             </TreeView>
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" />
 
-            <TextBox Grid.Column="2"
-                 FontFamily="Consolas"
-                 FontSize="14.0"
-                 Text="{Binding OutputText, Mode=OneWay}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 b:TextBoxBehaviors.AlwaysScrollToEnd="True" />
+            <TabControl Grid.Column="2" Name="Tabs" ItemsSource="{Binding Pages}">
+                <TabControl.ItemContainerStyle>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Header" Value="{Binding Caption}" />
+                        <Setter Property="Content" Value="{Binding Content}" />
+                    </Style>
+                </TabControl.ItemContainerStyle>
+            </TabControl>
         </Grid>
     </Grid>
 </Window>
