@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,7 +16,15 @@ namespace MSBuildWorkspaceTester.Services
         public WorkspaceService(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
-            Workspace = MSBuildWorkspace.Create();
+            var properties = new Dictionary<string, string>
+            {
+                // This property ensures that XAML files will be compiled in the current AppDomain
+                // rather than a separate one. Any tasks isolated in AppDomains or tasks that create
+                // AppDomains will likely not work due to https://github.com/Microsoft/MSBuildLocator/issues/16.
+                { "AlwaysCompileMarkupFilesInSeparateDomain", bool.FalseString }
+            };
+
+            Workspace = MSBuildWorkspace.Create(properties);
             Workspace.WorkspaceFailed += WorkspaceFailed;
         }
 
